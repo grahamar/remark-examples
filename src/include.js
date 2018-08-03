@@ -1,5 +1,5 @@
 const build = async ({ type, node, index, parent }) => {
-  return return [
+  return [
     { type: 'break' },
     { type: 'text', value: 'TODO: Include' },
   ];

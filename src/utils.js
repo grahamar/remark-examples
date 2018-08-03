@@ -1,5 +1,3 @@
-import u from 'unist-builder';
-
 /**
  * Eat the expection if a file is not found and return undefined instead.
  */

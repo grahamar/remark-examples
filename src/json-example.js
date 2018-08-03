@@ -1,5 +1,3 @@
-import u from 'unist-builder';
-
 import { DOC_PARSE_IDENT, DOC_TYPE_JSON_EXAMPLE } from './constants';
 import {
   maybeGetFileContents,
