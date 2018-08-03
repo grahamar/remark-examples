@@ -2,10 +2,10 @@ import { DOC_PARSE_IDENT, DOC_TYPE_JSON_EXAMPLE } from './constants';
 import {
   maybeGetFileContents,
   getCurlCommandFromOperation,
-  getMarkdownCodeBlock
+  getMarkdownCodeBlock,
 } from './utils';
 
-const build = async ({ type, node, index, parent }, { fetcher, baseUrl }) => {
+const build = async ({ node }, { fetcher, baseUrl }) => {
   // #doc:json:example [[[experiences/post/:organization/experiences/simple]]]
   const jsonPath = node.value
     .replace(DOC_PARSE_IDENT, '')
@@ -40,7 +40,7 @@ const build = async ({ type, node, index, parent }, { fetcher, baseUrl }) => {
       { type: 'break' },
       { type: 'text', value: 'body.json' },
       { type: 'break' },
-      getMarkdownCodeBlock(requestJson, 'json')
+      getMarkdownCodeBlock(requestJson, 'json'),
     ];
   }
 
@@ -50,11 +50,11 @@ const build = async ({ type, node, index, parent }, { fetcher, baseUrl }) => {
       { type: 'break' },
       { type: 'text', value: 'API Response' },
       { type: 'break' },
-      getMarkdownCodeBlock(responseJson, 'json')
+      getMarkdownCodeBlock(responseJson, 'json'),
     ];
   }
 
   return response;
-}
+};
 
 export default build;

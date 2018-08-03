@@ -19,7 +19,7 @@ import {
   DOC_TYPE_ENUM,
   DOC_TYPE_SECTION,
   DOC_TYPE_MODULE,
-  DOC_TYPE_INCLUDE
+  DOC_TYPE_INCLUDE,
 } from './constants';
 
 const types = {
@@ -30,7 +30,7 @@ const types = {
   [DOC_TYPE_INCLUDE]: include,
   [DOC_TYPE_MODULE]: moduleU,
   [DOC_TYPE_MODEL]: model,
-  [DOC_TYPE_ENUM]: enumU
+  [DOC_TYPE_ENUM]: enumU,
 };
 
 /**
@@ -45,7 +45,7 @@ const processDocItem = async (docItem, options) => {
   let replacement = node;
 
   try {
-    if(docType in types) {
+    if (docType in types) {
       replacement = await types[docType](docItem, options);
     } else {
       throw new Error(`Type not found: ${docType}`);
@@ -60,11 +60,11 @@ const processDocItem = async (docItem, options) => {
     docType,
     node: replacement,
     index,
-    parent
+    parent,
   };
 
   return item;
-}
+};
 
 /**
  * Operates on lines starting with `#doc:`.
@@ -89,7 +89,7 @@ const visitLink = async (ast, options) => {
   }
 
   return Promise.all(docItems.map(docItem => processDocItem(docItem, options))).then(() => ast);
-}
+};
 
 /**
  * Export the attacher which accepts options and returns the transformer to
@@ -99,7 +99,9 @@ const visitLink = async (ast, options) => {
  * @return {function}
  */
 export default (options) => {
-  return () => {
+  const attacher = () => {
+    const { fetcher, baseUrl } = options;
+
     /**
      * @link https://github.com/unifiedjs/unified#function-transformernode-file-next
      * @link https://github.com/syntax-tree/mdast
@@ -107,8 +109,8 @@ export default (options) => {
      * @param {function} next
      * @return {object}
      */
-    return async node => {
-      return await visitLink(node, options);
-    };
-  }
-}
+    return async node => visitLink(node, { fetcher, baseUrl });
+  };
+
+  return attacher;
+};

@@ -7,7 +7,7 @@ export const maybeGetFileContents = async (filePath, fetcher) => {
   } catch (e) {
     return undefined;
   }
-}
+};
 
 export const getCurlCommandFromOperation = (operation, queryString) => {
   const method = operation.method.toUpperCase();
@@ -17,12 +17,12 @@ export const getCurlCommandFromOperation = (operation, queryString) => {
   const uri = queryString ? `'${baseUrl}${path}${search}'` : `${baseUrl}${path}${search}`;
 
   switch (method) {
-  case 'GET':
-    return `curl -u <api-token>: ${uri}`;
-  default:
-    return `curl -X ${method} -d @body.json -u <api-token>: ${uri}`;
+    case 'GET':
+      return `curl -u <api-token>: ${uri}`;
+    default:
+      return `curl -X ${method} -d @body.json -u <api-token>: ${uri}`;
   }
-}
+};
 
 export const getMarkdownCodeBlock = (content, lang = '') => {
   if (typeof content === 'undefined') {
@@ -30,4 +30,4 @@ export const getMarkdownCodeBlock = (content, lang = '') => {
   }
 
   return { type: 'code', lang, value: content.trim() };
-}
+};
