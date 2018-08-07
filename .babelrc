@@ -1,7 +1,6 @@
 {
-  "presets": [["env", { "targets": { "node": "8" } }]],
+  "presets": ["env"],
   "plugins": [
-    "transform-async-to-generator",
     "transform-es2015-spread",
     "add-module-exports"
   ]
