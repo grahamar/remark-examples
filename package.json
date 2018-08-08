@@ -1,6 +1,6 @@
 {
   "name": "remark-examples",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Remark plugin that injects an example from a link to a local example file",
   "license": "MIT",
   "keywords": [
